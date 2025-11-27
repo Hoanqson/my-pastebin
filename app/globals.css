@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @keyframes gradient-x {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -8,8 +12,8 @@
 }
 
 @keyframes breathing {
-  0%, 100% { opacity: 0.9; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
 }
 .animate-breathing {
   animation: breathing 4s ease-in-out infinite;

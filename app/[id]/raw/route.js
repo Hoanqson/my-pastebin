@@ -1,10 +1,13 @@
-import { getEdgeConfig } from '@vercel/edge-config'
+import { get } from '@vercel/edge-config'
 
 export async function GET(request, { params }) {
   const { id } = params
-  const pastes = (await getEdgeConfig('pastes')) || {}
+  const EDGE_CONFIG_ITEM = 'pastes'
 
-  if (!pastes[id]) {
+  // Đọc từ Edge Config (chỉ read, dùng get đơn giản)
+  const pastes = await get(EDGE_CONFIG_ITEM) || {}
+
+  if (!pastes || !pastes[id]) {
     return new Response('Not found', { status: 404 })
   }
 

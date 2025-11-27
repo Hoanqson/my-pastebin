@@ -32,7 +32,7 @@ export default function Home() {
     <div className="min-h-screen flex items-center justify-center p-4 bg-gray-900">
       <div className="max-w-3xl w-full">
         <h1 className="text-5xl md:text-6xl font-bold text-center mb-10 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-          PasteBin Siêu Nhẹ
+          PasteBin
         </h1>
 
         <textarea

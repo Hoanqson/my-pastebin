@@ -13,13 +13,7 @@ export async function GET(request) {
   const id = nanoid(10)
   await redis.set(id, content)
 
-  // Fix URL 100% không lỗi nữa
-  let origin = request.headers.get('origin')
-  if (!origin) {
-    const host = request.headers.get('host') || 'my-pastebin-lime.vercel.app'
-    origin = `https://${host}`
-  }
-
+  const origin = request.headers.get('origin') || `https://${request.headers.get('host')}`
   const url = `${origin}/${id}`
 
   return Response.json({ url })

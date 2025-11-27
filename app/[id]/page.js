@@ -2,7 +2,11 @@ import { notFound } from 'next/navigation'
 
 export default async function Paste({ params }) {
   const { id } = params
-  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL || ''}/${id}/raw`, { next: { revalidate: 0 } })
+  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000' // Fallback cho dev
+  const res = await fetch(`${baseUrl}/${id}/raw`, { 
+    cache: 'no-store', // Đảm bảo đọc fresh
+    next: { revalidate: 0 } 
+  })
   
   if (!res.ok) notFound()
   
@@ -20,7 +24,7 @@ export default async function Paste({ params }) {
             Copy
           </button>
         </div>
-        <pre className="bg-gray-800 p-6 rounded-lg border border-gray-700 whitespace-pre-wrap break-all font-mono text-sm">
+        <pre className="bg-gray-800 p-6 rounded-lg border border-gray-700 whitespace-pre-wrap break-all font-mono text-sm overflow-auto">
           {content}
         </pre>
       </div>
